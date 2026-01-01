@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+/* RESET DASAR */
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+/* BACKGROUND OREN - MAKSA (!important) */
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  /* Warna Oren ke Merah Bata */
+  background: radial-gradient(circle at top left, #fb923c, #c2410c) !important;
+  overflow: hidden;
+  position: relative;
+}
+
+/* KARTU KACA */
+.glass-container {
+  position: relative;
+  width: 90%;
+  max-width: 400px;
+  background: rgba(255, 255, 255, 0.15); /* Kaca */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 24px;
+  padding: 50px 40px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  color: #fff; /* Teks Putih */
+}
+
+/* JUDUL */
+.title { font-size: 2rem; font-weight: 600; text-align: center; margin-bottom: 5px; }
+.subtitle { text-align: center; font-size: 0.9rem; margin-bottom: 40px; opacity: 0.9; }
+
+/* INPUT */
+.input-box {
+  position: relative; margin-bottom: 20px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  transition: 0.3s;
+}
+.input-box:focus-within { border-bottom: 2px solid #fff; }
+
+.input-box .icon {
+  position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+  color: #fff; font-size: 1.1rem;
+}
+
+.input-box input {
+  width: 100%; background: transparent; border: none; outline: none;
+  color: #fff; font-size: 1rem; padding: 10px 10px 10px 35px;
+}
+.input-box input::placeholder { color: rgba(255, 255, 255, 0.7); }
+
+.eye-icon {
+  position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+  cursor: pointer; opacity: 0.8;
+}
+
+/* LINK & OPSI */
+.options { display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 30px; }
+.options a { color: #fff; text-decoration: none; font-weight: 600; }
+.options a:hover { text-decoration: underline; }
+
+/* TOMBOL - WARNA OREN */
+.btn-submit {
+  width: 100%; padding: 15px; border: none;
+  background: #fff !important; /* Tombol Putih */
+  color: #c2410c !important;   /* Teks Oren */
+  border-radius: 12px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: 0.3s;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+.btn-submit:hover { transform: scale(1.02); background: #fff3e0 !important; }
+
+/* ERROR & LOADER */
+.error-msg {
+  color: #fff; font-size: 0.85rem; text-align: center; margin-bottom: 15px;
+  background: rgba(220, 38, 38, 0.6); padding: 5px; border-radius: 5px;
+}
+.loader {
+  border: 3px solid rgba(255, 255, 255, 0.3); border-top: 3px solid #c2410c;
+  border-radius: 50%; width: 20px; height: 20px;
+  animation: spin 1s linear infinite; display: inline-block;
+}
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
