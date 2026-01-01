@@ -2,9 +2,10 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { FaUser, FaLock, FaSpinner } from 'react-icons/fa';
+// JANGAN LUPA: Pastikan FaHeart sudah di-import di sini!
+import { FaUser, FaLock, FaSpinner, FaHeart } from 'react-icons/fa';
 
-// --- DATABASE KARYAWAN (DARI DATA YANG LU KASIH) ---
+// --- DATABASE KARYAWAN ---
 const employees = [
   { nik: "2015439740", nama: "GALANG DAVID PRASETYO", divisi: "LOGISTIC (CK SAMARINDA)" },
   { nik: "2015442298", nama: "AYYUB YASIN ROHALI", divisi: "KITCHEN SUPPORT (CK SAMARINDA)" },
@@ -32,7 +33,6 @@ const employees = [
   { nik: "2015483194", nama: "JIBRAN MAULANA", divisi: "PACKING 1 (CK SAMARINDA)" },
   { nik: "2015483232", nama: "AULIA RAHMAN", divisi: "PRODUCTION 2 (CK SAMARINDA)" },
   { nik: "2015503028", nama: "DAVI NURJANI DARMAWAN", divisi: "PACKING 1 (CK SAMARINDA)" },
-  { nik: "2015503030", nama: "ADELITA ROSE", divisi: "LOGISTIC (CK SAMARINDA)" },
   { nik: "2015503077", nama: "AMANDA RIFANI", divisi: "PACKING 1 (CK SAMARINDA)" },
   { nik: "2015503082", nama: "DAFFA IQBAL PRASETYO", divisi: "PRODUCTION 1 (CK SAMARINDA)" },
   { nik: "2015503089", nama: "IDI SISWANTO", divisi: "LOGISTIC (CK SAMARINDA)" },
@@ -49,7 +49,7 @@ const employees = [
   { nik: "2015637591", nama: "KHAIRULLAH IHSAN", divisi: "KITCHEN ADMINISTRATION (CK SAMARINDA)" },
   { nik: "2015663151", nama: "MUHAMMAD IBRAM MAULANA", divisi: "QUALITY ASSURANCE & CONTROL (CK SAMARINDA)" },
   { nik: "123456789", nama: "WIDIANA", divisi: "BRANCH MANAGER (CK SAMARINDA)" },
-  { nik: "123456", nama: "GW OWNERNYA", divisi: "CREATOR ENIH !!!!!" } // Akun Owner
+  { nik: "123456", nama: "GW OWNERNYA", divisi: "CREATOR ENIH !!!!!" }
 ];
 
 export default function Login() {
@@ -64,38 +64,31 @@ export default function Login() {
     setIsLoading(true);
     setError('');
 
-    // --- LOGIKA LOGIN OTOMATIS ---
-    // 1. Cari data karyawan berdasarkan NIK yang diketik
     const foundUser = employees.find(emp => emp.nik === nik);
 
     if (foundUser) {
-        // 2. Cek Password (Default: Password == NIK)
         if (password === foundUser.nik) {
-            // LOGIN SUKSES
             localStorage.setItem('user', JSON.stringify(foundUser));
-            
-            // Redirect ke Dashboard
             setTimeout(() => {
                 router.push('/dashboard');
             }, 1000);
         } else {
-            // Password Salah
             setError('Password salah! (Default: Gunakan NIK)');
             setIsLoading(false);
         }
     } else {
-        // NIK Tidak Ditemukan
         setError('NIK tidak terdaftar dalam database!');
         setIsLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-orange-50/50 p-4 font-sans">
-      <div className="bg-white p-8 rounded-3xl shadow-xl w-full max-w-md border border-orange-100 animate-slide-up">
+    // UBAH DISINI: Tambah flex-col biar numpuk ke bawah
+    <div className="min-h-screen flex flex-col items-center justify-center bg-orange-50/50 p-4 font-sans">
+      
+      {/* KOTAK LOGIN PUTIH */}
+      <div className="bg-white p-8 rounded-3xl shadow-xl w-full max-w-md border border-orange-100 animate-slide-up z-10 relative">
         <div className="flex flex-col items-center text-center mb-8">
-          
-          {/* LOGO PERUSAHAAN */}
           <div className="mb-4 relative w-32 h-16">
              <img 
                 src="/logo-yummy.png" 
@@ -103,7 +96,6 @@ export default function Login() {
                 className="object-contain w-full h-full"
              />
           </div>
-
           <h2 className="text-2xl font-extrabold text-gray-900 leading-tight">
             YC SAMARINDA
           </h2>
@@ -145,7 +137,6 @@ export default function Login() {
                   required
                 />
             </div>
-            <p className="text-xs text-gray-400 mt-1 pl-1 italic"></p>
           </div>
 
           {error && (
@@ -161,7 +152,7 @@ export default function Login() {
           >
             {isLoading ? (
                 <>
-                    <FaSpinner className="animate-spin" /> Memeriksa Data...
+                    <FaSpinner className="animate-spin" /> Masuk...
                 </>
             ) : (
                 "Masuk"
@@ -169,16 +160,18 @@ export default function Login() {
           </button>
         </form>
       </div>
-      {/* --- CREDIT FOOTER (INI DIA BRO!) --- */}
-        <div className="mt-8 border-t border-gray-100 pt-5 text-center">
-            <p className="text-[10px] text-gray-400 font-medium flex items-center justify-center gap-1">
-                App Developed with <FaHeart className="text-red-500 animate-pulse" /> by
-            </p>
-            <p className="text-xs font-bold text-orange-600 mt-0.5">
-                Septian Bayu Pradana
-            </p>
-        </div>
-        {/* ------------------------------------ */}
+      
+      {/* --- CREDIT FOOTER (PINDAH KE LUAR KOTAK PUTIH) --- */}
+      <div className="mt-8 text-center animate-fade-in">
+          <p className="text-[10px] text-gray-400 font-medium flex items-center justify-center gap-1">
+              Developed by
+          </p>
+          <p className="text-xs font-bold text-orange-600 mt-0.5">
+              ADM-SJ SMD
+          </p>
+      </div>
+      {/* -------------------------------------------------- */}
+
     </div>
   );
 }
