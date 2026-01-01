@@ -169,6 +169,16 @@ export default function Login() {
           </button>
         </form>
       </div>
+      {/* --- CREDIT FOOTER (INI DIA BRO!) --- */}
+        <div className="mt-8 border-t border-gray-100 pt-5 text-center">
+            <p className="text-[10px] text-gray-400 font-medium flex items-center justify-center gap-1">
+                App Developed with <FaHeart className="text-red-500 animate-pulse" /> by
+            </p>
+            <p className="text-xs font-bold text-orange-600 mt-0.5">
+                Septian Bayu Pradana
+            </p>
+        </div>
+        {/* ------------------------------------ */}
     </div>
   );
 }
