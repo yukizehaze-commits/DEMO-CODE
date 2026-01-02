@@ -2,54 +2,12 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-// JANGAN LUPA: Pastikan FaHeart sudah di-import di sini!
 import { FaUser, FaLock, FaSpinner, FaHeart } from 'react-icons/fa';
 
-// --- DATABASE KARYAWAN ---
 const employees = [
-  { nik: "2015439740", nama: "GALANG DAVID PRASETYO", divisi: "LOGISTIC (CK SAMARINDA)" },
-  { nik: "2015442298", nama: "AYYUB YASIN ROHALI", divisi: "KITCHEN SUPPORT (CK SAMARINDA)" },
-  { nik: "2015442547", nama: "KRESNA SENO DIWANGSA", divisi: "KITCHEN SUPPORT (CK SAMARINDA)" },
-  { nik: "2015453814", nama: "ANDI NASAR DWI SAPUTRA", divisi: "KITCHEN SUPPORT (CK SAMARINDA)" },
-  { nik: "2015453821", nama: "SEPTIAN BAYU PRADANA", divisi: "KITCHEN ADMINISTRATION (CK SAMARINDA)" },
-  { nik: "2015454891", nama: "VICKY INDRA SAPUTRA", divisi: "KITCHEN SUPPORT (CK SAMARINDA)" },
-  { nik: "2015456581", nama: "ANDIKA FEBRIAN", divisi: "KITCHEN ADMINISTRATION (CK SAMARINDA)" },
-  { nik: "2015458773", nama: "EVIANA", divisi: "KITCHEN ADMINISTRATION (CK SAMARINDA)" },
-  { nik: "2015460092", nama: "MUHAMMAD RIDHO", divisi: "PRODUCTION 2 (CK SAMARINDA)" },
-  { nik: "2015460098", nama: "MUHAMMAD HELMY", divisi: "LOGISTIC (CK SAMARINDA)" },
-  { nik: "2015460100", nama: "ARDY SAPUTRA", divisi: "QUALITY ASSURANCE & CONTROL (CK SAMARINDA)" },
-  { nik: "2015460103", nama: "RAHMAWATI", divisi: "PACKING 2 (CK SAMARINDA)" },
-  { nik: "2015460106", nama: "ANGGUN APRILIANI BONTA", divisi: "LOGISTIC (CK SAMARINDA)" },
-  { nik: "2015461575", nama: "ANDRIAN SAPUTRA", divisi: "KITCHEN SUPPORT (CK SAMARINDA)" },
-  { nik: "2015461576", nama: "MUHAMMAD NAFIIS", divisi: "KITCHEN SUPPORT (CK SAMARINDA)" },
-  { nik: "2015461702", nama: "SALSABILA AULIA RAHMASARI", divisi: "LOGISTIC (CK SAMARINDA)" },
-  { nik: "2015462426", nama: "MASNIAH", divisi: "LOGISTIC (CK SAMARINDA)" },
-  { nik: "2015468393", nama: "RISZKI FAUZAN", divisi: "KITCHEN SUPPORT (CK SAMARINDA)" },
-  { nik: "2015472104", nama: "ARIE RAHMADANI", divisi: "LOGISTIC (CK SAMARINDA)" },
-  { nik: "2015472269", nama: "DWI AGUNG SAPUTRA", divisi: "KITCHEN SUPPORT (CK SAMARINDA)" },
-  { nik: "2015474036", nama: "AHMAD RUDI KHAIRUDIN", divisi: "KITCHEN SUPPORT (CK SAMARINDA)" },
-  { nik: "2015483024", nama: "ALDY CAHYO MAHRIANTO", divisi: "KITCHEN SUPPORT (CK SAMARINDA)" },
-  { nik: "2015483101", nama: "ARUMI BAGAS TARA", divisi: "PACKING 1 (CK SAMARINDA)" },
-  { nik: "2015483194", nama: "JIBRAN MAULANA", divisi: "PACKING 1 (CK SAMARINDA)" },
-  { nik: "2015483232", nama: "AULIA RAHMAN", divisi: "PRODUCTION 2 (CK SAMARINDA)" },
-  { nik: "2015503028", nama: "DAVI NURJANI DARMAWAN", divisi: "PACKING 1 (CK SAMARINDA)" },
-  { nik: "2015503077", nama: "AMANDA RIFANI", divisi: "PACKING 1 (CK SAMARINDA)" },
-  { nik: "2015503082", nama: "DAFFA IQBAL PRASETYO", divisi: "PRODUCTION 1 (CK SAMARINDA)" },
-  { nik: "2015503089", nama: "IDI SISWANTO", divisi: "LOGISTIC (CK SAMARINDA)" },
-  { nik: "2015508191", nama: "IRZA AGANI FAHREZI", divisi: "KITCHEN ADMINISTRATION (CK SAMARINDA)" },
-  { nik: "2015508192", nama: "MUH MAULANA FIRGIE PRADIKTA", divisi: "KITCHEN SUPPORT (CK SAMARINDA)" },
-  { nik: "2015508215", nama: "FADIATHUL IFFAH ALMUSYAROFAH", divisi: "PACKING 1 (CK SAMARINDA)" },
-  { nik: "2015512680", nama: "RAHIMA MAULIDIA", divisi: "KITCHEN ADMINISTRATION (CK SAMARINDA)" },
-  { nik: "2015512681", nama: "AMMAR RIZQI", divisi: "PACKING 1 (CK SAMARINDA)" },
-  { nik: "2015514762", nama: "AHMAD MAULUDINSYAH", divisi: "KITCHEN SUPPORT (CK SAMARINDA)" },
-  { nik: "2015516973", nama: "RIKI ARMANDA", divisi: "PACKING 2 (CK SAMARINDA)" },
-  { nik: "2015517117", nama: "EKA PUJI RAHAYU", divisi: "PRODUCTION 1 (CK SAMARINDA)" },
-  { nik: "2015524204", nama: "AULIA DWI NUR ANGGRAINI", divisi: "QUALITY ASSURANCE & CONTROL (CK SAMARINDA)" },
-  { nik: "2015567985", nama: "MUSDALIFAH", divisi: "PACKING 1 (CK SAMARINDA)" },
-  { nik: "2015637591", nama: "KHAIRULLAH IHSAN", divisi: "KITCHEN ADMINISTRATION (CK SAMARINDA)" },
-  { nik: "2015663151", nama: "MUHAMMAD IBRAM MAULANA", divisi: "QUALITY ASSURANCE & CONTROL (CK SAMARINDA)" },
-  { nik: "123456789", nama: "WIDIANA", divisi: "BRANCH MANAGER (CK SAMARINDA)" },
-  { nik: "123456", nama: "GW OWNERNYA", divisi: "CREATOR ENIH !!!!!" }
+  { nik: "admin", nama: "SEPTIAN BAYU (ADMIN)", divisi: "IT DEVELOPMENT" },
+  { nik: "user", nama: "DEMO USER", divisi: "GENERAL STAFF" },
+  { nik: "guest", nama: "GUEST VISITOR", divisi: "PUBLIC RELATION" },
 ];
 
 export default function Login() {
@@ -71,42 +29,35 @@ export default function Login() {
             localStorage.setItem('user', JSON.stringify(foundUser));
             setTimeout(() => {
                 router.push('/dashboard');
-            }, 1000);
+            }, 800);
         } else {
-            setError('Password salah! (Default: Gunakan NIK)');
+            setError('Invalid Password. (Hint: Use NIK as password)');
             setIsLoading(false);
         }
     } else {
-        setError('NIK tidak terdaftar dalam database!');
+        setError('User ID not found. (Try: admin)');
         setIsLoading(false);
     }
   };
 
   return (
-    // UBAH DISINI: Tambah flex-col biar numpuk ke bawah
-    <div className="min-h-screen flex flex-col items-center justify-center bg-orange-50/50 p-4 font-sans">
-      
-      {/* KOTAK LOGIN PUTIH */}
-      <div className="bg-white p-8 rounded-3xl shadow-xl w-full max-w-md border border-orange-100 animate-slide-up z-10 relative">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 p-4 font-sans">
+      <div className="bg-white p-8 rounded-3xl shadow-xl w-full max-w-md border border-gray-100 animate-slide-up z-10 relative">
         <div className="flex flex-col items-center text-center mb-8">
-          <div className="mb-4 relative w-32 h-16">
-             <img 
-                src="/logo-yummy.png" 
-                alt="Yummy Choice Logo" 
-                className="object-contain w-full h-full"
-             />
+          <div className="mb-4 relative w-24 h-24 bg-orange-50 rounded-full flex items-center justify-center">
+             <span className="text-3xl">🍱</span>
           </div>
           <h2 className="text-2xl font-extrabold text-gray-900 leading-tight">
-            YC SAMARINDA
+            INTERNAL ORDER
           </h2>
           <p className="text-gray-500 text-sm mt-1 font-medium">
-            Login Karyawan
+            System Demo
           </p>
         </div>
 
         <form onSubmit={handleLogin} className="space-y-5">
           <div>
-            <label className="block text-gray-700 text-sm font-bold mb-2 pl-1">Nomor Induk Karyawan (NIK)</label>
+            <label className="block text-gray-700 text-sm font-bold mb-2 pl-1">Employee ID</label>
             <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <FaUser className="text-gray-400" />
@@ -115,7 +66,7 @@ export default function Login() {
                   type="text" 
                   value={nik}
                   onChange={(e) => setNik(e.target.value)}
-                  placeholder="Masukkan NIK"
+                  placeholder="ID (Try: admin)"
                   className="w-full bg-gray-50 text-gray-800 border border-gray-200 rounded-xl py-3 pl-10 pr-4 outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all font-medium"
                   required
                 />
@@ -132,7 +83,7 @@ export default function Login() {
                   type="password" 
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Password"
+                  placeholder="Password (Try: admin)"
                   className="w-full bg-gray-50 text-gray-800 border border-gray-200 rounded-xl py-3 pl-10 pr-4 outline-none focus:ring-2 focus:ring-orange-500/20 focus:border-orange-500 transition-all font-medium font-mono"
                   required
                 />
@@ -152,26 +103,23 @@ export default function Login() {
           >
             {isLoading ? (
                 <>
-                    <FaSpinner className="animate-spin" /> Masuk...
+                    <FaSpinner className="animate-spin" /> Authenticating...
                 </>
             ) : (
-                "Masuk"
+                "Sign In"
             )}
           </button>
         </form>
       </div>
       
-      {/* --- CREDIT FOOTER (PINDAH KE LUAR KOTAK PUTIH) --- */}
       <div className="mt-8 text-center animate-fade-in">
           <p className="text-[10px] text-gray-400 font-medium flex items-center justify-center gap-1">
               Developed by
           </p>
           <p className="text-xs font-bold text-orange-600 mt-0.5">
-              ADM-SJ SMD
+              Septian Bayu Pradana
           </p>
       </div>
-      {/* -------------------------------------------------- */}
-
     </div>
   );
 }
