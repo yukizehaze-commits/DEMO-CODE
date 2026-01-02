@@ -117,7 +117,7 @@ export default function Login() {
               Developed by
           </p>
           <p className="text-xs font-bold text-orange-600 mt-0.5">
-              Septian Bayu Pradana
+              Yuu
           </p>
       </div>
     </div>
